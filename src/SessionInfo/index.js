@@ -2,61 +2,9 @@ import React, { Component, Fragment } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
 
-const Wrapper = styled.div`
-  margin: 0em auto;
-  position: absolute;
-  top: 0;
-  z-index: ${props => (props.active ? `1000` : `25`)};
-  background-color: rgb(255, 255, 255);
-  border-radius: 1em;
-  padding-bottom: 1em;
-  width: 400px;
-`;
+import FilmSlide from "../FilmSlide";
 
-const Video = styled.video`
-  border-radius: 1em;
-  width: 100%;
-  height: 10em;
-  object-fit: cover;
-  transform: scale(1.03);
-`;
-
-const FilmInfo = styled.div`
-  padding: 0em 1em;
-`;
-
-const films = [
-  {
-    id: 551,
-    title: "Blade Runner 2048",
-    caption: "nice movie tho",
-    trailer: `https://zippy.gfycat.com/WaryScaryIndianringneckparakeet.webm`
-  },
-  {
-    id: 333,
-    title: "Aloha",
-    caption: "Oh ma",
-    trailer: `https://zippy.gfycat.com/WarlikeFlusteredIsabellineshrike.webm`
-  },
-  {
-    id: 888,
-    title: "John Wick",
-    caption: `Bloodthirsty bastard`,
-    trailer: `https://zippy.gfycat.com/FatherlyFailingDeinonychus.webm`
-  }
-];
-
-const Slide = ({ trailer, title, caption, active }) => (
-  <Wrapper active={active}>
-    <Video autoPlay={active ? "true" : null} loop={true}>
-      <source src={trailer} type={"video/webm"} />
-    </Video>
-    <FilmInfo>
-      <h3>{title}</h3>
-      <p>{caption}</p>
-    </FilmInfo>
-  </Wrapper>
-);
+import { films } from "../filmsDb";
 
 class SessionInfo extends Component {
   state = {
@@ -114,7 +62,7 @@ class SessionInfo extends Component {
           {films.map((filmObj, i) => {
             const { id, trailer, title, caption } = filmObj;
             return (
-              <Slide
+              <FilmSlide
                 key={Number(i) * 3}
                 trailer={trailer}
                 title={title}
