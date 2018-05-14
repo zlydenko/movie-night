@@ -7,6 +7,7 @@ export const films = [
     trailer: `https://zippy.gfycat.com/WaryScaryIndianringneckparakeet.webm`,
     tags: [`Drama`, `Mystery`, `Sci-Fi`],
     cast: [`Harrison Ford`, `Ryan Gosling`, `Ana de Armas`],
+    metacriticScore: 81,
     availableSessions: {
       1: 1526299483331,
       2: 1526399483331,
@@ -17,8 +18,12 @@ export const films = [
   {
     id: 333,
     title: "Aloha",
-    caption: "Oh ma",
+    caption:
+      "A celebrated military contractor returns to the site of his greatest career triumphs and reconnects with a long-ago love while unexpectedly falling for the hard-charging Air Force watch-dog assigned to him.",
     trailer: `https://zippy.gfycat.com/WarlikeFlusteredIsabellineshrike.webm`,
+    tags: [`Comedy`, `Drama`, `Romance`],
+    cast: [`Bradley Cooper`, `Rachel McAdams`, `Emma Stone`],
+    metacriticScore: 40,
     availableSessions: {
       5: 1526299483331,
       6: 1526399483331,
@@ -29,8 +34,11 @@ export const films = [
   {
     id: 888,
     title: "John Wick",
-    caption: `Bloodthirsty bastard`,
+    caption: `An ex-hitman comes out of retirement to track down the gangsters that killed his dog and took everything from him.`,
     trailer: `https://zippy.gfycat.com/FatherlyFailingDeinonychus.webm`,
+    tags: [`Action`, `Crime`, `Thriller`],
+    cast: [`Keanu Reeves`, `Michael Nyqvist`, `Alfie Allen`],
+    metacriticScore: 68,
     availableSessions: {
       9: 1526299483331,
       10: 1526399483331,
