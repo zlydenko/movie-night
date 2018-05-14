@@ -5,6 +5,8 @@ export const films = [
     caption:
       "A young blade runner's discovery of a long-buried secret leads him to track down former blade runner Rick Deckard, who's been missing for thirty years.",
     trailer: `https://zippy.gfycat.com/WaryScaryIndianringneckparakeet.webm`,
+    tags: [`Drama`, `Mystery`, `Sci-Fi`],
+    cast: [`Harrison Ford`, `Ryan Gosling`, `Ana de Armas`],
     availableSessions: {
       1: 1526299483331,
       2: 1526399483331,
