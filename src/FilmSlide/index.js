@@ -11,17 +11,13 @@ import {
   Btn
 } from "./styled";
 
+import SingleTrailer from "../SingleTrailer";
+
 export default class FilmSlide extends Component {
   state = {
     filmInfoOpened: false,
     trailerPlaying: false
   };
-
-  componentWillUpdate() {
-    if (this.state.trailerPlaying) {
-      this.videoElem.load();
-    }
-  }
 
   openFullInfo = () => {
     this.setState({ filmInfoOpened: !this.state.filmInfoOpened });
@@ -43,18 +39,12 @@ export default class FilmSlide extends Component {
     return (
       <Fragment>
         <Wrapper>
-          <Video
-            loop={trailerPlaying}
-            autoPlay={trailerPlaying}
-            filmInfoOpened={filmInfoOpened}
-            onClick={this.openFullInfo}
-            poster={"./blade-runner-banner.jpg"}
-            innerRef={x => {
-              this.videoElem = x;
-            }}
-          >
-            {trailerPlaying && <source src={trailer} type={"video/webm"} />}
-          </Video>
+          <SingleTrailer
+            trailerSource={trailer}
+            playing={trailerPlaying}
+            infoOpened={filmInfoOpened}
+            clickFn={this.openFullInfo}
+          />
           <InfoWrapper filmInfoOpened={filmInfoOpened}>
             <Info filmInfoOpened={filmInfoOpened} onClick={this.openFullInfo}>
               <MovieTitle>{title}</MovieTitle>
