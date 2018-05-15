@@ -1,17 +1,8 @@
 import React, { Component, Fragment } from "react";
-import {
-  Wrapper,
-  Video,
-  InfoWrapper,
-  Info,
-  MovieTitle,
-  Tags,
-  Cast,
-  Score,
-  Btn
-} from "./styled";
+import { Wrapper, Btn } from "./styled";
 
 import SingleTrailer from "../SingleTrailer";
+import Synopsis from "../Synopsis";
 
 export default class FilmSlide extends Component {
   state = {
@@ -25,16 +16,7 @@ export default class FilmSlide extends Component {
   };
 
   render() {
-    const {
-      trailer,
-      title,
-      caption,
-      id,
-      current,
-      tags,
-      cast,
-      score
-    } = this.props;
+    const { trailer, title, caption, tags, cast, score } = this.props;
     const { filmInfoOpened, trailerPlaying } = this.state;
     return (
       <Fragment>
@@ -45,23 +27,19 @@ export default class FilmSlide extends Component {
             infoOpened={filmInfoOpened}
             clickFn={this.openFullInfo}
           />
-          <InfoWrapper filmInfoOpened={filmInfoOpened}>
-            <Info filmInfoOpened={filmInfoOpened} onClick={this.openFullInfo}>
-              <MovieTitle>{title}</MovieTitle>
-              <Tags filmInfoOpened={filmInfoOpened}>{tags.join(" / ")}</Tags>
-              <Cast filmInfoOpened={filmInfoOpened}>{cast.join(` / `)}</Cast>
-              <p>{caption}</p>
-            </Info>
-            <Score
-              scoreLevel={
-                score >= 39 ? (score > 60 ? `Good` : `Medium`) : `Bad`
-              }
-            >
-              <span>{score}</span>
-            </Score>
-
+          <Synopsis
+            opened={filmInfoOpened}
+            clickFn={this.openFullInfo}
+            info={{
+              title,
+              tags,
+              cast,
+              caption,
+              score
+            }}
+          >
             <Btn filmInfoOpened={filmInfoOpened}>{"buy tickets"}</Btn>
-          </InfoWrapper>
+          </Synopsis>
         </Wrapper>
       </Fragment>
     );
