@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Wrapper, Btn } from "./styled";
 
 import SingleTrailer from "../SingleTrailer";
@@ -19,29 +19,27 @@ export default class FilmSlide extends Component {
     const { trailer, title, caption, tags, cast, score } = this.props;
     const { filmInfoOpened, trailerPlaying } = this.state;
     return (
-      <Fragment>
-        <Wrapper>
-          <SingleTrailer
-            trailerSource={trailer}
-            playing={trailerPlaying}
-            infoOpened={filmInfoOpened}
-            clickFn={this.openFullInfo}
-          />
-          <Synopsis
-            opened={filmInfoOpened}
-            clickFn={this.openFullInfo}
-            info={{
-              title,
-              tags,
-              cast,
-              caption,
-              score
-            }}
-          >
-            <Btn filmInfoOpened={filmInfoOpened}>{"buy tickets"}</Btn>
-          </Synopsis>
-        </Wrapper>
-      </Fragment>
+      <Wrapper>
+        <SingleTrailer
+          trailerSource={trailer}
+          playing={trailerPlaying}
+          infoOpened={filmInfoOpened}
+          clickFn={this.openFullInfo}
+        />
+        <Synopsis
+          opened={filmInfoOpened}
+          clickFn={this.openFullInfo}
+          info={{
+            title,
+            tags,
+            cast,
+            caption,
+            score
+          }}
+        >
+          <Btn filmInfoOpened={filmInfoOpened}>{"buy tickets"}</Btn>
+        </Synopsis>
+      </Wrapper>
     );
   }
 }
