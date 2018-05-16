@@ -12,9 +12,9 @@ const Wrapper = styled.div`
 
 export default class FilmSlide extends Component {
   state = {
-    onMain: true,
-    infoExtended: false,
-    sessionPicker: false
+    onMain: false,
+    infoExtended: true,
+    sessionPicker: true
   };
 
   openFullInfo = () => {
@@ -54,7 +54,8 @@ export default class FilmSlide extends Component {
       <Wrapper>
         <SingleTrailer {...trailerProps} />
         <Synopsis {...synopsisProps}>
-          {infoExtended && <Btn clickFn={this.openSessionPicker} />}
+          {infoExtended &&
+            !sessionPicker && <Btn clickFn={this.openSessionPicker} />}
         </Synopsis>
       </Wrapper>
     );
