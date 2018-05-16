@@ -6,6 +6,8 @@ import {
   moveLeftAnimation
 } from "../utils/animations";
 
+import SessionPicker from "../SessionPicker";
+
 const scoreColor = n => {
   return n <= 39 ? `#f00` : n >= 60 ? `#6c3` : `#fc3`;
 };
@@ -81,8 +83,6 @@ const Synopsis = ({ children, extended, clickFn, info, sessionPicker }) => {
 
   return (
     <Wrapper opened={extended}>
-      {sessionPicker && <h1>hello world</h1>}
-
       {!sessionPicker && (
         <Info opened={extended} onClick={clickFn}>
           <Header>
@@ -105,6 +105,8 @@ const Synopsis = ({ children, extended, clickFn, info, sessionPicker }) => {
           <p>{caption}</p>
         </Info>
       )}
+
+      {sessionPicker && <SessionPicker />}
 
       {children}
     </Wrapper>
