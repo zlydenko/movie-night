@@ -1,5 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { moveDownAnimation } from "../utils/animations";
+
+const scoreColor = n => {
+  return n <= 39 ? `#f00` : n >= 60 ? `#6c3` : `#fc3`;
+};
 
 const Wrapper = styled.div`
   transition: all 0.55s;
@@ -22,6 +27,7 @@ const Info = styled.div`
 `;
 
 const Title = styled.h3`
+  margin-top: 0em;
   font-size: 1.5em;
   letter-spacing: 0.05em;
 `;
@@ -42,18 +48,16 @@ const Cast = Tags.extend`
 `;
 
 const Score = styled.div`
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  background-color: ${props =>
-    props.scoreLevel === "Bad"
-      ? `#f00`
-      : props.scoreLevel === "Medium"
-        ? `#fc3`
-        : `#6c3`};
-  color: ${props =>
-    props.scoreLevel === "Medium" ? `rgb(0,0,0)` : `rgb(255,255,255)`};
-  padding: 0.5em 0.7em;
+  flex-basis: 10%;
+  height: 1.5em;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 0.5em;
+  background-color: ${props => props.bg};
+  color: ${props => (props.bg === "#fc3" ? `rgb(0,0,0)` : `rgb(255,255,255)`)};
+  transform: translate(0, -10em);
+  ${moveDownAnimation(`0.5s`)};
 
   & span {
     font-size: 1.4em;
@@ -62,21 +66,26 @@ const Score = styled.div`
   }
 `;
 
+const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Synopsis = ({ children, opened, clickFn, info }) => (
   <Wrapper opened={opened}>
     <Info opened={opened} onClick={clickFn}>
-      <Title>{info.title}</Title>
+      <Header>
+        <Title>{info.title}</Title>
+        {opened && (
+          <Score bg={scoreColor(info.score)}>
+            <span>{info.score}</span>
+          </Score>
+        )}
+      </Header>
       <Tags opened={opened}>{info.tags.join(" / ")}</Tags>
       <Cast opened={opened}>{info.cast.join(` / `)}</Cast>
       <p>{info.caption}</p>
     </Info>
-    <Score
-      scoreLevel={
-        info.score >= 39 ? (info.score > 60 ? `Good` : `Medium`) : `Bad`
-      }
-    >
-      <span>{info.score}</span>
-    </Score>
 
     {children}
   </Wrapper>
