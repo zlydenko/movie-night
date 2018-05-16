@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import { Wrapper, Btn } from "./styled";
+import styled from "styled-components";
 
 import SingleTrailer from "../SingleTrailer";
 import Synopsis from "../Synopsis";
+import Btn from "../Btn";
 
-const BuyBtn = props => <Btn {...props}>{"buy tickets"}</Btn>;
+const Wrapper = styled.div`
+  width: 100%;
+  position: relative;
+`;
 
 export default class FilmSlide extends Component {
   state = {
@@ -14,11 +18,12 @@ export default class FilmSlide extends Component {
   };
 
   openFullInfo = () => {
+    this.setState({ onMain: !this.state.onMain });
     this.setState({ infoExtended: !this.state.infoExtended });
   };
 
   openSessionPicker = () => {
-    this.setState({ onMain: !this.state.onMain });
+    this.setState({ infoExtended: !this.state.infoExtended });
     this.setState({ sessionPicker: !this.state.sessionPicker });
   };
 
@@ -28,7 +33,7 @@ export default class FilmSlide extends Component {
 
     const trailerProps = {
       trailerSource: trailer,
-      infoOpened: infoExtended,
+      infoOpened: infoExtended || sessionPicker,
       clickFn: this.openFullInfo
     };
 
@@ -49,7 +54,7 @@ export default class FilmSlide extends Component {
       <Wrapper>
         <SingleTrailer {...trailerProps} />
         <Synopsis {...synopsisProps}>
-          {infoExtended && <BuyBtn onClick={this.openSessionPicker} />}
+          {infoExtended && <Btn clickFn={this.openSessionPicker} />}
         </Synopsis>
       </Wrapper>
     );
