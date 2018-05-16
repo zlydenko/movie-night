@@ -1,6 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
-import { moveDownAnimation } from "../utils/animations";
+import {
+  moveDownAnimation,
+  moveRightAnimation,
+  moveLeftAnimation
+} from "../utils/animations";
 
 const scoreColor = n => {
   return n <= 39 ? `#f00` : n >= 60 ? `#6c3` : `#fc3`;
@@ -37,14 +41,13 @@ const Tags = styled.p`
   font-weight: 700;
   font-size: 0.9em;
   margin-top: 0em;
-  margin-bottom: ${props => (props.opened ? `1em` : `0em`)};
-  height: ${props => (props.opened ? `auto` : `0em`)};
-  transition: all 0.8s;
-  ${props => (props.opened ? null : `transform: translate(50em,0);`)};
+  transform: translate(20em, 0);
+  ${moveRightAnimation(`0.3s`)};
 `;
 
 const Cast = Tags.extend`
-  ${props => (props.opened ? null : `transform: translate(-50em,0);`)};
+  transform: translate(-20em, 0);
+  ${moveLeftAnimation(`0.3s`)};
 `;
 
 const Score = styled.div`
@@ -71,24 +74,37 @@ const Header = styled.header`
   justify-content: space-between;
 `;
 
-const Synopsis = ({ children, opened, clickFn, info }) => (
-  <Wrapper opened={opened}>
-    <Info opened={opened} onClick={clickFn}>
-      <Header>
-        <Title>{info.title}</Title>
-        {opened && (
-          <Score bg={scoreColor(info.score)}>
-            <span>{info.score}</span>
-          </Score>
-        )}
-      </Header>
-      <Tags opened={opened}>{info.tags.join(" / ")}</Tags>
-      <Cast opened={opened}>{info.cast.join(` / `)}</Cast>
-      <p>{info.caption}</p>
-    </Info>
+const Synopsis = ({ children, opened, clickFn, info }) => {
+  const { title, tags, cast, score, caption } = info;
+  const tagsText = tags.join(" / ");
+  const castText = cast.join(` / `);
 
-    {children}
-  </Wrapper>
-);
+  return (
+    <Wrapper opened={opened}>
+      <Info opened={opened} onClick={clickFn}>
+        <Header>
+          <Title>{title}</Title>
+
+          {opened && (
+            <Score bg={scoreColor(score)}>
+              <span>{score}</span>
+            </Score>
+          )}
+        </Header>
+
+        {opened && (
+          <Fragment>
+            <Tags>{tagsText}</Tags>
+            <Cast>{castText}</Cast>
+          </Fragment>
+        )}
+
+        <p>{caption}</p>
+      </Info>
+
+      {children}
+    </Wrapper>
+  );
+};
 
 export default Synopsis;
