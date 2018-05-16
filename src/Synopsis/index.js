@@ -74,33 +74,37 @@ const Header = styled.header`
   justify-content: space-between;
 `;
 
-const Synopsis = ({ children, opened, clickFn, info }) => {
+const Synopsis = ({ children, extended, clickFn, info, sessionPicker }) => {
   const { title, tags, cast, score, caption } = info;
   const tagsText = tags.join(" / ");
   const castText = cast.join(` / `);
 
   return (
-    <Wrapper opened={opened}>
-      <Info opened={opened} onClick={clickFn}>
-        <Header>
-          <Title>{title}</Title>
+    <Wrapper opened={extended}>
+      {sessionPicker && <h1>hello world</h1>}
 
-          {opened && (
-            <Score bg={scoreColor(score)}>
-              <span>{score}</span>
-            </Score>
+      {!sessionPicker && (
+        <Info opened={extended} onClick={clickFn}>
+          <Header>
+            <Title>{title}</Title>
+
+            {extended && (
+              <Score bg={scoreColor(score)}>
+                <span>{score}</span>
+              </Score>
+            )}
+          </Header>
+
+          {extended && (
+            <Fragment>
+              <Tags>{tagsText}</Tags>
+              <Cast>{castText}</Cast>
+            </Fragment>
           )}
-        </Header>
 
-        {opened && (
-          <Fragment>
-            <Tags>{tagsText}</Tags>
-            <Cast>{castText}</Cast>
-          </Fragment>
-        )}
-
-        <p>{caption}</p>
-      </Info>
+          <p>{caption}</p>
+        </Info>
+      )}
 
       {children}
     </Wrapper>

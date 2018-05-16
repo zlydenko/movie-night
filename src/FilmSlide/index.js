@@ -4,20 +4,27 @@ import { Wrapper, Btn } from "./styled";
 import SingleTrailer from "../SingleTrailer";
 import Synopsis from "../Synopsis";
 
-const BuyBtn = () => <Btn>{"buy tickets"}</Btn>;
+const BuyBtn = props => <Btn {...props}>{"buy tickets"}</Btn>;
 
 export default class FilmSlide extends Component {
   state = {
-    infoExtended: false
+    onMain: true,
+    infoExtended: false,
+    sessionPicker: false
   };
 
   openFullInfo = () => {
     this.setState({ infoExtended: !this.state.infoExtended });
   };
 
+  openSessionPicker = () => {
+    this.setState({ onMain: !this.state.onMain });
+    this.setState({ sessionPicker: !this.state.sessionPicker });
+  };
+
   render() {
     const { trailer, title, caption, tags, cast, score } = this.props;
-    const { infoExtended } = this.state;
+    const { infoExtended, sessionPicker } = this.state;
 
     const trailerProps = {
       trailerSource: trailer,
@@ -26,7 +33,8 @@ export default class FilmSlide extends Component {
     };
 
     const synopsisProps = {
-      opened: infoExtended,
+      extended: infoExtended,
+      sessionPicker: sessionPicker,
       clickFn: this.openFullInfo,
       info: {
         title,
@@ -40,7 +48,9 @@ export default class FilmSlide extends Component {
     return (
       <Wrapper>
         <SingleTrailer {...trailerProps} />
-        <Synopsis {...synopsisProps}>{infoExtended && <BuyBtn />}</Synopsis>
+        <Synopsis {...synopsisProps}>
+          {infoExtended && <BuyBtn onClick={this.openSessionPicker} />}
+        </Synopsis>
       </Wrapper>
     );
   }
