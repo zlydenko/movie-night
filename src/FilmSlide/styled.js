@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { moveUpAnimation } from "../utils/animations";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -16,7 +17,6 @@ const moveUp = keyframes`
 `;
 
 export const Btn = styled.button`
-  //transition: transform 0.9s;
   display: block;
   width: 40%;
   padding: 0.5em;
@@ -33,9 +33,7 @@ export const Btn = styled.button`
   opacity: 0.9;
   transform: translate(0, 10em);
 
-  animation: 0.5s ${moveUp} linear 1 forwards;
-
-  &:hover {
+  ${moveUpAnimation(`0.5s`)} &:hover {
     opacity: 0.85;
   }
 
