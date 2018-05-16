@@ -15,18 +15,18 @@ const Video = styled.video`
 
 export default class SingleTrailer extends Component {
   componentWillUpdate() {
-    if (this.props.playing) {
+    if (this.props.infoOpened) {
       this.videoElem.load();
     }
   }
 
   render() {
-    const { playing, infoOpened, clickFn, trailerSource } = this.props;
+    const { infoOpened, clickFn, trailerSource } = this.props;
 
     return (
       <Video
-        loop={playing}
-        autoPlay={playing}
+        loop={infoOpened}
+        autoPlay={infoOpened}
         filmInfoOpened={infoOpened}
         poster={"./blade-runner-banner.jpg"}
         onClick={clickFn}
@@ -34,7 +34,7 @@ export default class SingleTrailer extends Component {
           this.videoElem = x;
         }}
       >
-        {playing && <source src={trailerSource} type={"video/webm"} />}
+        {infoOpened && <source src={trailerSource} type={"video/webm"} />}
       </Video>
     );
   }

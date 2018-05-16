@@ -6,28 +6,25 @@ import Synopsis from "../Synopsis";
 
 export default class FilmSlide extends Component {
   state = {
-    filmInfoOpened: false,
-    trailerPlaying: false
+    infoExtended: false
   };
 
   openFullInfo = () => {
-    this.setState({ filmInfoOpened: !this.state.filmInfoOpened });
-    this.setState({ trailerPlaying: !this.state.trailerPlaying });
+    this.setState({ infoExtended: !this.state.infoExtended });
   };
 
   render() {
     const { trailer, title, caption, tags, cast, score } = this.props;
-    const { filmInfoOpened, trailerPlaying } = this.state;
+    const { infoExtended } = this.state;
     return (
       <Wrapper>
         <SingleTrailer
           trailerSource={trailer}
-          playing={trailerPlaying}
-          infoOpened={filmInfoOpened}
+          infoOpened={infoExtended}
           clickFn={this.openFullInfo}
         />
         <Synopsis
-          opened={filmInfoOpened}
+          opened={infoExtended}
           clickFn={this.openFullInfo}
           info={{
             title,
@@ -37,7 +34,7 @@ export default class FilmSlide extends Component {
             score
           }}
         >
-          <Btn filmInfoOpened={filmInfoOpened}>{"buy tickets"}</Btn>
+          <Btn filmInfoOpened={infoExtended}>{"buy tickets"}</Btn>
         </Synopsis>
       </Wrapper>
     );

@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div
         style={{
-          width: "50%",
+          width: "90%",
           margin: "1em auto"
         }}
       >
