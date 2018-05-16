@@ -8,12 +8,12 @@ export const films = [
     tags: [`Drama`, `Mystery`, `Sci-Fi`],
     cast: [`Harrison Ford`, `Ryan Gosling`, `Ana de Armas`],
     metacriticScore: 81,
-    availableSessions: {
-      1: 1526299483331,
-      2: 1526399483331,
-      3: 1526400483331,
-      4: 1526721583331
-    }
+    availableSessions: [
+      { id: 1, timestamp: 1526299483331 },
+      { id: 2, timestamp: 1526399483331 },
+      { id: 3, timestamp: 1526400483331 },
+      { id: 4, timestamp: 1526721583331 }
+    ]
   },
   {
     id: 333,
