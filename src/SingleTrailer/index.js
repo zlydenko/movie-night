@@ -1,5 +1,15 @@
 import React, { Component } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const transformation = keyframes`
+  40% {
+    transform: perspective(1000px) scale(1.05) rotateX(0deg)
+  }
+
+  100% {
+    transform: perspective(1000px) scale(0.95) rotateX(-45deg)
+  }
+`;
 
 const Video = styled.video`
   transition: all 0.4s;
@@ -9,32 +19,32 @@ const Video = styled.video`
   width: 100%;
   height: 10em;
   object-fit: cover;
-  ${props => (props.filmInfoOpened ? null : `transform: scale(1.05)`)};
+  ${props => (props.playing ? null : `transform: scale(1.05)`)};
   cursor: pointer;
+  transform: perspective(1000px)
+    ${props => (props.playing ? null : `scale(1.05)`)} rotateX(0deg);
+  ${props =>
+    props.inPerspective
+      ? `animation: 0.8s ${transformation} ease-in 1 forwards`
+      : null};
 `;
 
 export default class SingleTrailer extends Component {
-  componentWillUpdate() {
-    if (this.props.infoOpened) {
-      this.videoElem.load();
-    }
-  }
-
   render() {
-    const { infoOpened, clickFn, trailerSource } = this.props;
+    const { playing, trailerSource, inPerspective } = this.props;
 
     return (
       <Video
-        loop={infoOpened}
-        autoPlay={infoOpened}
-        filmInfoOpened={infoOpened}
+        loop={playing}
+        autoPlay={playing}
+        playing={playing}
+        inPerspective={inPerspective}
         poster={"./blade-runner-banner.jpg"}
-        onClick={clickFn}
         innerRef={x => {
           this.videoElem = x;
         }}
       >
-        {infoOpened && <source src={trailerSource} type={"video/webm"} />}
+        {playing && <source src={trailerSource} type={"video/webm"} />}
       </Video>
     );
   }

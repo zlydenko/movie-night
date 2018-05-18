@@ -30,8 +30,8 @@ const Btn = styled.button`
   }
 `;
 
-const Button = ({ clickFn }) => {
-  return <Btn onClick={clickFn}>{"buy tickets"}</Btn>;
+const Button = () => {
+  return <Btn>{"buy tickets"}</Btn>;
 };
 
 export default Button;

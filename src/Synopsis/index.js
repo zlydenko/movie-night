@@ -6,30 +6,14 @@ import {
   moveLeftAnimation
 } from "../utils/animations";
 
-import SessionPicker from "../SessionPicker";
-
 const scoreColor = n => {
   return n <= 39 ? `#f00` : n >= 60 ? `#6c3` : `#fc3`;
 };
 
-const Wrapper = styled.div`
-  transition: all 0.55s;
-  z-index: 10;
-  width: 100%;
-  position: absolute;
-  top: ${props => (props.opened ? `11em` : `0`)};
-  background-color: rgb(255, 255, 255);
-  padding-top: ${props => (props.opened ? `1em` : `11em`)};
-  padding-bottom: ${props => (props.opened ? `1em` : `0em`)};
-  border-radius: ${props => (props.opened ? `none` : `1em`)};
-  user-select: none;
-  cursor: pointer;
-  overflow: hidden;
-`;
-
 const Info = styled.div`
   padding: 0em 1em;
   transition: all 1s;
+  color: rgb(0, 0, 0);
 `;
 
 const Title = styled.h3`
@@ -76,40 +60,32 @@ const Header = styled.header`
   justify-content: space-between;
 `;
 
-const Synopsis = ({ children, extended, clickFn, info, sessionPicker }) => {
+const Synopsis = ({ info, short, extended }) => {
   const { title, tags, cast, score, caption } = info;
   const tagsText = tags.join(" / ");
   const castText = cast.join(` / `);
 
   return (
-    <Wrapper opened={extended}>
-      {!sessionPicker && (
-        <Info opened={extended} onClick={clickFn}>
-          <Header>
-            <Title>{title}</Title>
+    <Info>
+      <Header>
+        <Title>{title}</Title>
 
-            {extended && (
-              <Score bg={scoreColor(score)}>
-                <span>{score}</span>
-              </Score>
-            )}
-          </Header>
+        {extended && (
+          <Score bg={scoreColor(score)}>
+            <span>{score}</span>
+          </Score>
+        )}
+      </Header>
 
-          {extended && (
-            <Fragment>
-              <Tags>{tagsText}</Tags>
-              <Cast>{castText}</Cast>
-            </Fragment>
-          )}
-
-          <p>{caption}</p>
-        </Info>
+      {extended && (
+        <Fragment>
+          <Tags>{tagsText}</Tags>
+          <Cast>{castText}</Cast>
+        </Fragment>
       )}
 
-      {sessionPicker && <SessionPicker />}
-
-      {children}
-    </Wrapper>
+      <p>{caption}</p>
+    </Info>
   );
 };
 

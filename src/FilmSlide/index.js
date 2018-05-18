@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import SingleTrailer from "../SingleTrailer";
 import Synopsis from "../Synopsis";
@@ -11,36 +12,24 @@ const Wrapper = styled.div`
 `;
 
 export default class FilmSlide extends Component {
-  state = {
-    onMain: false,
-    infoExtended: true,
-    sessionPicker: true
-  };
-
-  openFullInfo = () => {
-    this.setState({ onMain: !this.state.onMain });
-    this.setState({ infoExtended: !this.state.infoExtended });
-  };
-
-  openSessionPicker = () => {
-    this.setState({ infoExtended: !this.state.infoExtended });
-    this.setState({ sessionPicker: !this.state.sessionPicker });
-  };
-
   render() {
-    const { trailer, title, caption, tags, cast, score } = this.props;
-    const { infoExtended, sessionPicker } = this.state;
+    const {
+      trailer,
+      title,
+      caption,
+      tags,
+      cast,
+      score,
+      match,
+      id,
+      extended
+    } = this.props;
 
     const trailerProps = {
-      trailerSource: trailer,
-      infoOpened: infoExtended || sessionPicker,
-      clickFn: this.openFullInfo
+      trailerSource: trailer
     };
 
     const synopsisProps = {
-      extended: infoExtended,
-      sessionPicker: sessionPicker,
-      clickFn: this.openFullInfo,
       info: {
         title,
         tags,
@@ -50,13 +39,14 @@ export default class FilmSlide extends Component {
       }
     };
 
+    const link = match.url === "/" ? `/film/${id}` : `/`;
+
     return (
       <Wrapper>
-        <SingleTrailer {...trailerProps} />
-        <Synopsis {...synopsisProps}>
-          {infoExtended &&
-            !sessionPicker && <Btn clickFn={this.openSessionPicker} />}
-        </Synopsis>
+        <Link to={link}>
+          <SingleTrailer {...trailerProps} />
+          <Synopsis {...synopsisProps} />
+        </Link>
       </Wrapper>
     );
   }
