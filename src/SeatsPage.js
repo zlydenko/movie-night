@@ -9,6 +9,7 @@ import Card from "./UI/Card";
 import SingleTrailer from "./SingleTrailer";
 import Synopsis from "./Synopsis";
 import Btn from "./Btn";
+import SeatsPicker from "./SeatsPicker";
 
 const info = {
   id: films[0].id,
@@ -35,12 +36,7 @@ const SeatsPage = props => {
           <SingleTrailer playing inPerspective trailerSource={info.trailer} />
         </A>
         <Card extended inPerspective>
-          <A to={`/`}>
-            <Synopsis extended info={info} />
-          </A>
-          <A to={`${match.url}/sessions`}>
-            <Btn />
-          </A>
+          <SeatsPicker match={match} />
         </Card>
       </SlideWrapper>
     </div>
