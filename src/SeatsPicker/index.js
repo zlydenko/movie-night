@@ -20,7 +20,7 @@ const Cell = styled.div`
   border-radius: 0.2em;
 `;
 
-const SeatsGrid = ({ reservedSeats, clickFn }) => {
+const SeatsGrid = ({ reservedSeats, clickFn, chosen }) => {
   const seatsAvailable = new Array(100).fill(null);
   const reservingSeats = reservedSeats.map(value => {
     const row = value[0];
@@ -33,7 +33,13 @@ const SeatsGrid = ({ reservedSeats, clickFn }) => {
     <Grid>
       {seatsAvailable.map((value, _) => {
         if (value === null) {
-          return <Cell onClick={clickFn} key={_} />;
+          return (
+            <Cell
+              selected={chosen.includes(_ + 1)}
+              onClick={() => clickFn(_)}
+              key={_}
+            />
+          );
         } else {
           return <Cell notAvailable key={_} />;
         }
@@ -48,9 +54,17 @@ class SeatsPicker extends React.Component {
   };
 
   selectSeats(_) {
-    const index = Number(_._targetInst.return.key) + 1;
-    console.log(index);
-    // this.setState({ chosenSeats: [...this.state.chosenSeats, index] });
+    const seatIndex = _ + 1;
+    const curSeats = this.state.chosenSeats;
+    const isChosen = curSeats.indexOf(seatIndex) !== -1;
+    let newSeats;
+    if (isChosen) {
+      newSeats = [...curSeats];
+      newSeats.splice(newSeats.indexOf(seatIndex), 1);
+    } else {
+      newSeats = [...curSeats, seatIndex];
+    }
+    this.setState({ chosenSeats: newSeats });
   }
 
   render() {
@@ -60,7 +74,14 @@ class SeatsPicker extends React.Component {
     return (
       <div>
         <h1>{id}</h1>
-        <SeatsGrid reservedSeats={seatsArr} clickFn={this.selectSeats} />
+        <SeatsGrid
+          reservedSeats={seatsArr}
+          clickFn={this.selectSeats.bind(this)}
+          chosen={this.state.chosenSeats}
+        />
+        {this.state.chosenSeats.length > 0 && (
+          <p>{`Seats for checkout: ${this.state.chosenSeats.join(", ")}`}</p>
+        )}
       </div>
     );
   }
