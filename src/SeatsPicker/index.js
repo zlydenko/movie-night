@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import { seats } from "../filmsDb";
 
@@ -18,6 +19,26 @@ const Cell = styled.div`
     props.notAvailable ? `darkgrey` : props.selected ? `yellow` : `teal`};
   cursor: ${props => (props.notAvailable ? `default` : `pointer`)};
   border-radius: 0.2em;
+`;
+
+const CheckoutBtn = styled.button`
+  margin: 1em auto 0em auto;
+  display: inline-block;
+  text-decoration: none;
+  background-color: orange;
+  border: none;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
 `;
 
 const SeatsGrid = ({ reservedSeats, clickFn, chosen }) => {
@@ -50,7 +71,8 @@ const SeatsGrid = ({ reservedSeats, clickFn, chosen }) => {
 
 class SeatsPicker extends React.Component {
   state = {
-    chosenSeats: []
+    chosenSeats: [],
+    redirect: false
   };
 
   selectSeats(_) {
@@ -79,9 +101,17 @@ class SeatsPicker extends React.Component {
           clickFn={this.selectSeats.bind(this)}
           chosen={this.state.chosenSeats}
         />
-        {this.state.chosenSeats.length > 0 && (
-          <p>{`Seats for checkout: ${this.state.chosenSeats.join(", ")}`}</p>
-        )}
+        <footer style={{ textAlign: "center" }}>
+          {this.state.chosenSeats.length > 0 && (
+            <Link
+              to={`/buy?session=${id}?seats=${this.state.chosenSeats.join(
+                "&"
+              )}`}
+            >
+              <CheckoutBtn>checkout</CheckoutBtn>
+            </Link>
+          )}
+        </footer>
       </div>
     );
   }
