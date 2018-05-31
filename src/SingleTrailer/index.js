@@ -40,9 +40,6 @@ export default class SingleTrailer extends Component {
         playing={playing}
         inPerspective={inPerspective}
         poster={"./blade-runner-banner.jpg"}
-        innerRef={x => {
-          this.videoElem = x;
-        }}
       >
         {playing && <source src={trailerSource} type={"video/webm"} />}
       </Video>
