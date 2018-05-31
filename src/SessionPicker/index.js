@@ -11,7 +11,6 @@ const A = styled(Link)`
 `;
 
 const SessionPicker = props => {
-  const { match } = props;
   return (
     <Fragment>
       {films[0].availableSessions.map((obj, _) => {
