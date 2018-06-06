@@ -23,13 +23,6 @@ const info = {
   score: films[0].metacriticScore
 };
 
-// TODO:
-// * 1.trailer routes
-// * 2.card routes
-// * 3.combining
-
-// ! Trailer routes
-
 const Poster = () => (
   <Anchor to={`/film/${info.id}`}>
     <SingleTrailer trailerSource={info.trailer} />
@@ -57,8 +50,6 @@ const Trailer = () => (
     <Route path="/film/" component={PlayingTrailer} />
   </Switch>
 );
-
-// ! Card routes
 
 const MainPage = () => (
   <Anchor to={`/film/${info.id}`}>
@@ -114,8 +105,6 @@ const Info = () => (
     <Route path="/film/" component={InfoPage} />
   </Switch>
 );
-
-// ! Main Route
 
 const Routes = () => (
   <div style={{ width: "90%", margin: "1em auto 0 auto" }}>
