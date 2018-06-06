@@ -3,21 +3,17 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { films } from "../filmsDb";
 
+import Anchor from "../UI/Anchor";
 import Session from "./Session";
-
-const A = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-`;
 
 const SessionPicker = props => {
   return (
     <Fragment>
       {films[0].availableSessions.map((obj, _) => {
         return (
-          <A to={`/sessions/${obj.id}`} key={_}>
+          <Anchor to={`/sessions/${obj.id}`} key={_}>
             <Session time={obj.timestamp} />
-          </A>
+          </Anchor>
         );
       })}
     </Fragment>
