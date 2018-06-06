@@ -11,6 +11,7 @@ import SessionPicker from "./SessionPicker";
 import SeatsPicker from "./SeatsPicker";
 import SlideWrapper from "./UI/SlideWrapper";
 import Anchor from "./UI/Anchor";
+import Receipt from "./UI/Receipt";
 
 const info = {
   id: films[0].id,
@@ -90,11 +91,26 @@ const SeatsPage = ({ match }) => (
   </Card>
 );
 
+const CheckoutPage = ({ match }) => {
+  const sessionId = match.params.sessionId;
+  const formattedSeats = match.params.seats.split("&").join(", ");
+
+  return (
+    <Receipt>
+      <h1>hello</h1>
+      <p>
+        You bought {formattedSeats} on #{sessionId} session.
+      </p>
+    </Receipt>
+  );
+};
+
 const Info = () => (
   <Switch>
     <Route exact path="/" component={MainPage} />
     <Route exact path="/film/:filmId/sessions" component={SessionsPage} />
     <Route exact path="/sessions/:sessionId" component={SeatsPage} />
+    <Route exact path="/buy/:sessionId/:seats" component={CheckoutPage} />
     <Route path="/film/" component={InfoPage} />
   </Switch>
 );

@@ -103,11 +103,7 @@ class SeatsPicker extends React.Component {
         />
         <footer style={{ textAlign: "center" }}>
           {this.state.chosenSeats.length > 0 && (
-            <Link
-              to={`/buy?session=${id}?seats=${this.state.chosenSeats.join(
-                "&"
-              )}`}
-            >
+            <Link to={`/buy/${id}/${this.state.chosenSeats.join("&")}`}>
               <CheckoutBtn>checkout</CheckoutBtn>
             </Link>
           )}
