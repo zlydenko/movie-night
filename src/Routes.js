@@ -85,9 +85,13 @@ const SeatsPage = ({ match }) => (
 const CheckoutPage = ({ match }) => {
   const sessionId = match.params.sessionId;
   const formattedSeats = match.params.seats.split("&").join(", ");
+  const qrcodeInfo = `
+  seats: ${formattedSeats};
+  session: ${sessionId};
+  `;
 
   return (
-    <Receipt>
+    <Receipt data={qrcodeInfo}>
       <h1>hello</h1>
       <p>
         You bought {formattedSeats} on #{sessionId} session.
