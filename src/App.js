@@ -1,18 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+
+import { films } from "./filmsDb";
+
+import FilmSlide from "./FilmSlide";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div
+        style={{
+          width: "90%",
+          margin: "1em auto"
+        }}
+      >
+        <FilmSlide
+          trailer={films[0].trailer}
+          title={films[0].title}
+          caption={films[0].caption}
+          tags={films[0].tags}
+          cast={films[0].cast}
+          id={films[0].id}
+          score={films[0].metacriticScore}
+        />
       </div>
     );
   }
