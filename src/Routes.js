@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import theme from "./UI/theme";
 
 import { films } from "./filmsDb";
 
@@ -65,7 +67,7 @@ const InfoPage = ({ location }) => (
       <Synopsis extended info={info} />
     </Anchor>
     <Anchor to={`${location.pathname}/sessions`}>
-      <Btn />
+      <Btn text={"buy tickets"} />
     </Anchor>
   </Card>
 );
@@ -110,15 +112,24 @@ const Info = () => (
   </Switch>
 );
 
-const Routes = () => (
-  <div style={{ width: "90%", margin: "1em auto 0 auto" }}>
-    <Router>
-      <SlideWrapper>
-        <Trailer />
-        <Info />
-      </SlideWrapper>
-    </Router>
-  </div>
-);
+const Background = styled.div`
+  font-family: ${props => props.theme.fonts.main};
+  padding-top: 3em;
+  width: 100%;
+  min-height: 100vh;
+  background: ${props => props.theme.colors.bgGradient};
+  overflow: hidden;
+`;
 
-export default Routes;
+export default () => (
+  <ThemeProvider theme={theme}>
+    <Background>
+      <Router>
+        <SlideWrapper>
+          <Trailer />
+          <Info />
+        </SlideWrapper>
+      </Router>
+    </Background>
+  </ThemeProvider>
+);

@@ -9,10 +9,10 @@ const Btn = styled.button`
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 700;
-  font-family: "Inconsolata", monospace;
-  background-color: orange;
-  color: rgb(0, 0, 0);
-  border: 0.1em solid transparent;
+  font-family: ${props => props.theme.fonts.buttons};
+  background-color: ${props => props.theme.colors.buttons.bg};
+  color: ${props => props.theme.colors.buttons.text};
+  border: 0.1em solid ${props => props.theme.colors.buttons.border};
   border-radius: 0.5em;
   cursor: pointer;
   margin: 0em auto;
@@ -30,8 +30,8 @@ const Btn = styled.button`
   }
 `;
 
-const Button = () => {
-  return <Btn>{"buy tickets"}</Btn>;
+const Button = ({ text }) => {
+  return <Btn>{text}</Btn>;
 };
 
 export default Button;

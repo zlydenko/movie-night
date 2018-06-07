@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 
 import { seats } from "../filmsDb";
 
+import Btn from "../Btn";
+import Anchor from "../UI/Anchor";
+
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(10, 1.3em);
@@ -16,20 +19,25 @@ const Grid = styled.div`
 
 const Cell = styled.div`
   background-color: ${props =>
-    props.notAvailable ? `darkgrey` : props.selected ? `yellow` : `teal`};
+    props.notAvailable
+      ? props.theme.colors.seatsPicker.reserved
+      : props.selected
+        ? props.theme.colors.seatsPicker.selected
+        : props.theme.colors.seatsPicker.free};
   cursor: ${props => (props.notAvailable ? `default` : `pointer`)};
   border-radius: 0.2em;
 `;
 
 const CheckoutBtn = styled.button`
+  font-family: ${props => props.theme.fonts.buttons};
   margin: 1em auto 0em auto;
   display: inline-block;
   text-decoration: none;
-  background-color: orange;
-  border: none;
+  background-color: ${props => props.theme.colors.buttons.bg};
+  border: 0.1em solid ${props => props.theme.colors.buttons.border};
   border-radius: 1em;
   padding: 0.5em 1em;
-  color: white;
+  color: ${props => props.theme.colors.buttons.text};
   cursor: pointer;
 
   &:hover {
@@ -103,9 +111,9 @@ class SeatsPicker extends React.Component {
         />
         <footer style={{ textAlign: "center" }}>
           {this.state.chosenSeats.length > 0 && (
-            <Link to={`/buy/${id}/${this.state.chosenSeats.join("&")}`}>
-              <CheckoutBtn>checkout</CheckoutBtn>
-            </Link>
+            <Anchor to={`/buy/${id}/${this.state.chosenSeats.join("&")}`}>
+              <Btn text={"checkout"} />
+            </Anchor>
           )}
         </footer>
       </div>

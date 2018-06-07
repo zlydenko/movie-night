@@ -6,14 +6,10 @@ import {
   moveLeftAnimation
 } from "../utils/animations";
 
-const scoreColor = n => {
-  return n <= 39 ? `#f00` : n >= 60 ? `#6c3` : `#fc3`;
-};
-
 const Info = styled.div`
   padding: 0em 1em;
   transition: all 1s;
-  color: rgb(0, 0, 0);
+  color: ${props => props.theme.colors.infoText};
 `;
 
 const Title = styled.h3`
@@ -23,7 +19,7 @@ const Title = styled.h3`
 `;
 
 const Tags = styled.p`
-  font-family: "Inconsolata", monospace;
+  font-family: ${props => props.theme.fonts.additional};
   font-weight: 700;
   font-size: 0.9em;
   margin-top: 0em;
@@ -43,14 +39,20 @@ const Score = styled.div`
   align-content: center;
   justify-content: center;
   padding: 0.5em;
-  background-color: ${props => props.bg};
-  color: ${props => (props.bg === "#fc3" ? `rgb(0,0,0)` : `rgb(255,255,255)`)};
+  background-color: ${props =>
+    props.data <= 39
+      ? props.theme.colors.metascores.bad
+      : props.data >= 60
+        ? props.theme.colors.metascores.good
+        : props.theme.colors.metascores.average};
+  color: ${props =>
+    props.data >= 39 && props.data < 60 ? `rgb(0,0,0)` : `rgb(255,255,255)`};
   transform: translate(0, -10em);
   ${moveDownAnimation(`0.5s`)};
 
   & span {
     font-size: 1.4em;
-    font-family: "Inconsolata", monospace;
+    font-family: ${props => props.theme.fonts.metascores};
     letter-spacing: -0.09em;
   }
 `;
@@ -71,7 +73,7 @@ const Synopsis = ({ info, short, extended }) => {
         <Title>{title}</Title>
 
         {extended && (
-          <Score bg={scoreColor(score)}>
+          <Score data={score}>
             <span>{score}</span>
           </Score>
         )}

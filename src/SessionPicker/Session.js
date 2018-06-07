@@ -7,16 +7,17 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 1em 1em;
+  background-color: ${props => props.theme.colors.sessionPicker.bg};
 
   &:hover {
-    background-color: rgba(75, 0, 130, 0.3);
+    background-color: ${props => props.theme.colors.sessionPicker.hovered};
   }
 `;
 
 const Day = styled.span`
   font-size: 3em;
   margin-right: 0.4em;
-  font-family: "Inconsolata", monospace;
+  font-family: ${props => props.theme.fonts.additional};
   font-weight: bold;
   letter-spacing: -0.15em;
 
@@ -35,7 +36,7 @@ const Weekday = styled.p`
 
 const Time = styled.p`
   margin: 0em;
-  font-family: "Inconsolata", monospace;
+  font-family: ${props => props.theme.fonts.additional};
 
   ${Wrapper}:hover & {
     opacity: 0.7;

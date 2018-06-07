@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 const SlideWrapper = styled.div`
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   position: relative;
+  font-family: inherit;
 `;
 
 export default SlideWrapper;
