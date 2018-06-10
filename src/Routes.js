@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import styled, { ThemeProvider } from "styled-components";
+import styled, { injectGlobal, ThemeProvider } from "styled-components";
 import theme from "./UI/theme";
+import "flexboxgrid2";
 
 import { films } from "./filmsDb";
 
@@ -25,38 +26,50 @@ const info = {
   score: films[0].metacriticScore
 };
 
+injectGlobal`
+  body {
+    font-family: ${theme.fonts.main};
+    padding-top: 0.6em;
+    width: 100%;
+    min-height: 100vh;
+    background: ${theme.colors.bgGradient};
+    overflow: hidden;
+  }
+`;
+
 const Poster = () => (
-  <Anchor to={`/film/${info.id}`}>
-    <SingleTrailer trailerSource={info.trailer} />
+  <Anchor to={`/film/${films[0].id}`}>
+    <SingleTrailer trailerSource={films[0].trailer} />
   </Anchor>
 );
 
 const PlayingTrailer = ({ location }) => {
   const onSessionsPage = location.pathname.includes("sessions");
   return (
-    // ? only came up with this hack to disable link
     <Anchor to={onSessionsPage ? location.pathname : "/"}>
-      <SingleTrailer playing trailerSource={info.trailer} />
+      <SingleTrailer playing trailerSource={films[0].trailer} />
     </Anchor>
   );
 };
 
 const SeatsTrailer = () => (
-  <SingleTrailer inPerspective playing trailerSource={info.trailer} />
+  <SingleTrailer inPerspective playing trailerSource={films[0].trailer} />
 );
 
 const Trailer = () => (
   <Switch>
-    <Route exact path="/" component={Poster} />
+    <Route exact path="/">
+      <Poster />
+    </Route>
     <Route exact path="/sessions/:sessionId" component={SeatsTrailer} />
     <Route path="/film/" component={PlayingTrailer} />
   </Switch>
 );
 
 const MainPage = () => (
-  <Anchor to={`/film/${info.id}`}>
+  <Anchor to={`/film/${films[0].id}`}>
     <Card>
-      <Synopsis info={info} />
+      <Synopsis info={films[0]} />
     </Card>
   </Anchor>
 );
@@ -64,7 +77,7 @@ const MainPage = () => (
 const InfoPage = ({ location }) => (
   <Card extended>
     <Anchor to="/">
-      <Synopsis extended info={info} />
+      <Synopsis extended info={films[0]} />
     </Anchor>
     <Anchor to={`${location.pathname}/sessions`}>
       <Btn text={"buy tickets"} />
@@ -87,13 +100,9 @@ const SeatsPage = ({ match }) => (
 const CheckoutPage = ({ match }) => {
   const sessionId = match.params.sessionId;
   const formattedSeats = match.params.seats.split("&").join(", ");
-  const qrcodeInfo = `
-  seats: ${formattedSeats};
-  session: ${sessionId};
-  `;
 
   return (
-    <Receipt data={qrcodeInfo}>
+    <Receipt>
       <h1>hello</h1>
       <p>
         You bought {formattedSeats} on #{sessionId} session.
@@ -112,24 +121,17 @@ const Info = () => (
   </Switch>
 );
 
-const Background = styled.div`
-  font-family: ${props => props.theme.fonts.main};
-  padding-top: 3em;
-  width: 100%;
-  min-height: 100vh;
-  background: ${props => props.theme.colors.bgGradient};
-  overflow: hidden;
-`;
-
 export default () => (
   <ThemeProvider theme={theme}>
-    <Background>
-      <Router>
-        <SlideWrapper>
-          <Trailer />
-          <Info />
-        </SlideWrapper>
-      </Router>
-    </Background>
+    <Router>
+      <div className="container">
+        <div className="col-lg-4 col-md-8 col-xs-12">
+          <SlideWrapper>
+            <Trailer />
+            <Info />
+          </SlideWrapper>
+        </div>
+      </div>
+    </Router>
   </ThemeProvider>
 );
