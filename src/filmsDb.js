@@ -5,6 +5,7 @@ export const films = [
     caption:
       "A young blade runner's discovery of a long-buried secret leads him to track down former blade runner Rick Deckard, who's been missing for thirty years.",
     trailer: `https://zippy.gfycat.com/WaryScaryIndianringneckparakeet.webm`,
+    poster: `https://theplaylist.net/wp-content/uploads/2017/08/bladerunner-2049-1200x520.jpg`,
     tags: [`Drama`, `Mystery`, `Sci-Fi`],
     cast: [`Harrison Ford`, `Ryan Gosling`, `Ana de Armas`],
     metacriticScore: 81,
@@ -21,6 +22,7 @@ export const films = [
     caption:
       "A celebrated military contractor returns to the site of his greatest career triumphs and reconnects with a long-ago love while unexpectedly falling for the hard-charging Air Force watch-dog assigned to him.",
     trailer: `https://zippy.gfycat.com/WarlikeFlusteredIsabellineshrike.webm`,
+    poster: `http://1.bp.blogspot.com/-rYXLyuEMcpk/VUMsuFrCO2I/AAAAAAAAJeo/-UfwnXjc4eA/s1600/aloha_poster-2.jpg`,
     tags: [`Comedy`, `Drama`, `Romance`],
     cast: [`Bradley Cooper`, `Rachel McAdams`, `Emma Stone`],
     metacriticScore: 40,
@@ -36,6 +38,7 @@ export const films = [
     title: "John Wick",
     caption: `An ex-hitman comes out of retirement to track down the gangsters that killed his dog and took everything from him.`,
     trailer: `https://zippy.gfycat.com/FatherlyFailingDeinonychus.webm`,
+    poster: `https://www.vrfocus.com/wp-content/uploads/2015/08/John-Wick-Poster-1.jpg`,
     tags: [`Action`, `Crime`, `Thriller`],
     cast: [`Keanu Reeves`, `Michael Nyqvist`, `Alfie Allen`],
     metacriticScore: 68,

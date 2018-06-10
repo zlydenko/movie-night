@@ -31,7 +31,7 @@ const Video = styled.video`
 
 export default class SingleTrailer extends Component {
   render() {
-    const { playing, trailerSource, inPerspective } = this.props;
+    const { playing, trailerSource, inPerspective, poster } = this.props;
 
     return (
       <Video
@@ -39,7 +39,7 @@ export default class SingleTrailer extends Component {
         autoPlay={playing}
         playing={playing}
         inPerspective={inPerspective}
-        poster={"./blade-runner-banner.jpg"}
+        poster={poster}
       >
         {playing && <source src={trailerSource} type={"video/webm"} />}
       </Video>

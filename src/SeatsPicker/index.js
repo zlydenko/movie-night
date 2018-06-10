@@ -98,8 +98,7 @@ class SeatsPicker extends React.Component {
   }
 
   render() {
-    const { match } = this.props;
-    const id = match.params.sessionId;
+    const id = this.props.match.match.match.params.sessionId;
     const seatsArr = seats[id];
     return (
       <div>

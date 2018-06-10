@@ -62,8 +62,15 @@ const Header = styled.header`
   justify-content: space-between;
 `;
 
-const Synopsis = ({ info, short, extended }) => {
-  const { title, tags, cast, score, caption } = info;
+const Synopsis = ({
+  title,
+  tags,
+  cast,
+  metacriticScore,
+  caption,
+  short,
+  extended
+}) => {
   const tagsText = tags.join(" / ");
   const castText = cast.join(` / `);
 
@@ -73,8 +80,8 @@ const Synopsis = ({ info, short, extended }) => {
         <Title>{title}</Title>
 
         {extended && (
-          <Score data={score}>
-            <span>{score}</span>
+          <Score data={metacriticScore}>
+            <span>{metacriticScore}</span>
           </Score>
         )}
       </Header>

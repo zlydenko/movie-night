@@ -1,33 +1,33 @@
 export default {
   colors: {
-    bgGradient: `linear-gradient(to right, #333333, #dd1818)`,
+    bgGradient: `linear-gradient(to right, #43cea2, #185a9d)`,
     card: {
-      bg: `rgb(0, 0, 0)`,
-      text: `rgb(255,255,255)`
+      bg: `rgb(255, 255, 255)`,
+      text: `rgb(0,0,0)`
     },
     buttons: {
-      bg: `#14A76C`,
-      text: `#272727`,
-      border: `transparent`
+      bg: `#fff`,
+      text: `#000`,
+      border: `navy`
     },
-    infoText: `rgb(255,255,255)`,
+    infoText: `rgb(0,0,0)`,
     metascores: {
       bad: `#f00`,
       average: `#fc3`,
       good: `#6c3`
     },
     sessionPicker: {
-      bg: `black`,
-      hovered: `powderblue`
+      bg: `#fff`,
+      hovered: `#43cea2`
     },
     seatsPicker: {
       reserved: `lightgrey`,
-      free: `rgb(0,55,215)`,
+      free: `#185a9d`,
       selected: `gold`
     },
     receipt: {
-      bg: `rgb(0, 0, 0)`,
-      text: `rgb(255,255,255)`,
+      bg: `rgb(255, 255, 255)`,
+      text: `rgb(0,0,0)`,
       shadow: `rgba(255, 255, 255, 0.8)`
     }
   },
