@@ -10,7 +10,7 @@ const SessionPicker = props => {
       <Title month={"June"} />
       {films[0].availableSessions.map((obj, _) => {
         return (
-          <Anchor to={`/sessions/${obj.id}`} key={_}>
+          <Anchor to={`/sessions/${obj.id}&${obj.timestamp}`} key={_}>
             <Session time={obj.timestamp} />
           </Anchor>
         );

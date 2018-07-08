@@ -1,11 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import format from "date-fns/format";
 
 import { seats } from "../filmsDb";
 
 import Btn from "../Btn";
 import Anchor from "../UI/Anchor";
+
+const SessionTitle = styled.h1`
+  margin-top: 0em;
+  padding-left: 0.5em;
+  font-size: 1.7em;
+`;
 
 const Grid = styled.div`
   display: grid;
@@ -25,12 +32,13 @@ const Cell = styled.div`
         ? props.theme.colors.seatsPicker.selected
         : props.theme.colors.seatsPicker.free};
   cursor: ${props => (props.notAvailable ? `default` : `pointer`)};
+  ${props => (props.notAvailable ? null : `border: 0.1em solid;`)};
   border-radius: 0.2em;
 `;
 
 const CheckoutBtn = styled.button`
   font-family: ${props => props.theme.fonts.buttons};
-  margin: 1em auto 0em auto;
+  margin: 1em auto;
   display: inline-block;
   text-decoration: none;
   background-color: ${props => props.theme.colors.buttons.bg};
@@ -98,17 +106,27 @@ class SeatsPicker extends React.Component {
   }
 
   render() {
-    const id = this.props.match.match.match.params.sessionId;
+    const routeParameters = this.props.match.match.match.params.sessionId.split(
+      "&"
+    );
+    const id = routeParameters[0];
+    const time = Number(routeParameters[1]);
     const seatsArr = seats[id];
     return (
       <div>
-        <h1>{id}</h1>
+        <SessionTitle>
+          {format(time, "dddd,")}
+          <br />
+          {format(time, "DD")}
+          {"th of "}
+          {format(time, "MMMM")}
+        </SessionTitle>
         <SeatsGrid
           reservedSeats={seatsArr}
           clickFn={this.selectSeats.bind(this)}
           chosen={this.state.chosenSeats}
         />
-        <footer style={{ textAlign: "center" }}>
+        <footer style={{ paddingTop: "1em" }}>
           {this.state.chosenSeats.length > 0 && (
             <Anchor to={`/buy/${id}/${this.state.chosenSeats.join("&")}`}>
               <Btn text={"checkout"} />

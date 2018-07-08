@@ -115,7 +115,7 @@ const Info = () => (
   <Switch>
     <Route exact path="/" component={MainPage} />
     <Route exact path="/film/:filmId/sessions" component={SessionsPage} />
-    <Route exact path="/sessions/:sessionId" component={SeatsPage} />
+    <Route exact path="/sessions/:sessionId&:timeId" component={SeatsPage} />
     <Route exact path="/buy/:sessionId/:seats" component={CheckoutPage} />
     <Route path="/film/" component={InfoPage} />
   </Switch>

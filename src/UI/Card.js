@@ -13,7 +13,7 @@ const Card = styled.div`
   width: 100%;
   position: absolute;
   top: ${props => (props.extended ? `11em` : `0`)};
-  ${props => (props.inPerspective ? `top: 9em;` : null)};
+  ${props => (props.inPerspective ? `top: 8em;` : null)};
   color: ${props => props.theme.colors.card.text};
   background-color: ${props => props.theme.colors.card.bg};
   padding-top: ${props => (props.extended ? `1em` : `11em`)};
