@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import format from "date-fns/format";
+import QRCode from "qrcode.react";
 
 import Anchor from "../UI/Anchor";
 import Card from "../UI/Card";
@@ -96,10 +97,13 @@ const CheckoutPage = ({ match, availableSessions }) => {
   return (
     <Receipt>
       <h1>Thank You!</h1>
-      <p>
+      <p style={{ lineHeight: "1.5em" }}>
         You bought {displaySeats} at{" "}
         <strong>{format(timestamp, "DD/MM HH:mm")}</strong>
       </p>
+      <div style={{ margin: "0 auto" }}>
+        <QRCode value={formattedSeats.join(", ")} level={"L"} />
+      </div>
     </Receipt>
   );
 };
