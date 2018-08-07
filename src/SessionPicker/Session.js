@@ -55,4 +55,16 @@ const Session = ({ time }) => {
   );
 };
 
+const MonthTitle = styled.h3`
+  text-align: left;
+  padding-left: 1em;
+  text-transform: uppercase;
+  font-weight: normal;
+  margin-bottom: 0em;
+`;
+
+export const Title = ({ month }) => {
+  return <MonthTitle>{month}</MonthTitle>;
+};
+
 export default Session;

@@ -78,7 +78,6 @@ const Synopsis = ({
     <Info>
       <Header>
         <Title>{title}</Title>
-
         {extended && (
           <Score data={metacriticScore}>
             <span>{metacriticScore}</span>
